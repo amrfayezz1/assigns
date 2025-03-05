@@ -19,9 +19,6 @@ class ApiService {
       body: jsonEncode(data),
     );
 
-    print("STATUS CODE: ${response.statusCode}");
-    print("RESPONSE BODY: ${response.body}"); // Debugging
-
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
 
@@ -80,6 +77,29 @@ class ApiService {
         },
       );
       prefs.remove('token'); // Remove token
+    }
+  }
+
+  // ✅ Fetch user data using stored token
+  static Future<Map<String, dynamic>?> getUserData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+
+    if (token == null) return null; // No token found, return null
+
+    final response = await http.get(
+      Uri.parse("$baseUrl/user"),
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "Bearer $token",
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body)['user']; // ✅ Return user data
+    } else {
+      return null; // Failed to fetch user, force login
     }
   }
 
