@@ -28,7 +28,7 @@ Route::post('/register', function (Request $request) {
         ],
         'student_id' => 'required|digits:8|unique:users',
         'password' => 'required|min:8|confirmed',
-        'gender' => 'nullable|in:male,female',
+        'gender' => 'nullable|in:Male,Female',
         'level' => 'nullable|in:1,2,3,4',
     ]);
 
