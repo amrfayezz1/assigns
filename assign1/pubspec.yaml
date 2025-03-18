@@ -10,7 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
   shared_preferences: ^2.2.2
-  http: ^0.13.6
+  http: ^1.3.0
+  image_picker: ^1.0.7  # For selecting images from gallery or camera
 
 dev_dependencies:
   flutter_test:
@@ -19,3 +20,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/default_profile.png  # Ensure this file exists in your assets folder

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../screens/login_screen.dart'; // Import login screen
+import '../screens/login_screen.dart';
+import '../screens/editprofilescreen.dart'; // Import Edit Profile Screen
 
 class HomeScreen extends StatelessWidget {
   final String userName;
@@ -33,7 +34,23 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: Text("Hello, $userName!", style: TextStyle(fontSize: 24)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Hello, $userName!", style: TextStyle(fontSize: 24)),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // ✅ Navigate to Edit Profile Screen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EditProfileScreen()),
+                );
+              },
+              child: Text("Edit Profile"),
+            ),
+          ],
+        ),
       ),
     );
   }
